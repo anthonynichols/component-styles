@@ -20,5 +20,10 @@
   "bugs": {
     "url": "https://github.com/anthonynichols/component-styles/issues"
   },
-  "homepage": "https://github.com/anthonynichols/component-styles#readme"
+  "homepage": "https://github.com/anthonynichols/component-styles#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "specificity": "^0.2.1",
+    "stylus": "^0.54.5"
+  }
 }
