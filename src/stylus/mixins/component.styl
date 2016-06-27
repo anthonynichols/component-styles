@@ -1,0 +1,33 @@
+component($names...) {
+
+  // if length($names) > 1 {
+  //   for $name, $index in $names {
+  //     p(selector())
+  //
+  //   }
+  // }
+
+  $selector = ''
+
+  if length($names) > 1 {
+    for $name, $index in $names {
+      $selector += '.' + $component-symbol + $name
+
+      if ($index + 1) != length($names) {
+        $selector += ','
+      }
+    }
+  } else {
+    $selector += '.' + $component-symbol + $names
+  }
+
+  {$selector} {
+    {block}
+  }
+}
+
+// component($names..., $block) {
+//   {component-selector($names)} {
+//     $block()
+//   }
+// }

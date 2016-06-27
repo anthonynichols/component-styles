@@ -1,0 +1,17 @@
+// =============================================================================
+// Component Styles
+// =============================================================================
+
+build-modifier-selector($modifiers...) {
+  $selector = ''
+
+  for $modifier, $index in $modifiers {
+    $selector += '&.' + $modifier-symbol + $modifier
+
+    if ($index + 1) != length($modifiers) {
+      $selector += ','
+    }
+  }
+
+  return $selector
+}

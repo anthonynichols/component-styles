@@ -1,0 +1,12 @@
+// =============================================================================
+// Component Styles
+//
+// Modifier mixin
+// Description goes here!
+// =============================================================================
+
+@mixin modifier($names...) {
+  #{_build-modifier(_escape-symbol($modifier-symbol), $names)} {
+    @content;
+  }
+}

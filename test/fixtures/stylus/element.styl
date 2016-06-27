@@ -1,0 +1,42 @@
+@import "../../../src/stylus/component-styles";
+
+{_component('Panel')} {
+  background-color: #fff
+
+  {_element('list')} {
+    list-style: none
+
+    {_element('item')} {
+      color: #bada55;
+
+      {_modifier('new')} {
+        color: darken(#bada55, 25%);
+      }
+    }
+
+    {_modifier('list-modifier')} {
+      color: orange
+
+      // Shoudl be .Panel-list.\--list-modifier .Panel-list-inner-item
+      {_element('inner-item')} {
+        display: block
+
+        // ^[0] {
+        //   content: '^[0]'
+        // }
+        //
+        // ^[-1] {
+        //   content: '^[-1]'
+        // }
+        //
+        // ^[-2] {
+        //   content: '^[-2]'
+        // }
+        //
+        // & ^[0] {
+        //   content: '& ^[0]'
+        // }
+      }
+    }
+  }
+}

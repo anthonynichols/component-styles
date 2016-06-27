@@ -1,0 +1,13 @@
+@import "../../../src/sass/component-styles";
+
+@include component(Card) {
+  background-color: #fff;
+
+  @include component(Icon) {
+    fill: #f00;
+  }
+}
+
+@include component(Button, Avatar) {
+  cursor: pointer;
+}

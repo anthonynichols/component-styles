@@ -1,0 +1,21 @@
+@import "../../../src/sass/component-styles";
+
+@include component(Panel) {
+  background-color: #fff;
+
+  @include element(list) {
+    list-style: none;
+
+    @include element(item) {
+      color: #bada55;
+
+      @include modifier(new) {
+        color: darken(#bada55, 25%);
+      }
+    }
+  }
+
+  @include modifier("-") {
+    display: none;
+  }
+}

@@ -1,0 +1,29 @@
+element($names...) {
+  // {build-element-selector($names)} {
+  //   {block}
+  // }
+
+  $selector = ''
+
+  if length($names) > 1 {
+    for $name, $index in $names {
+      $selector += '&' + $element-symbol + $name
+
+      if ($index + 1) != length($names) {
+        $selector += ','
+      }
+    }
+  } else {
+    $selector += '&' + $element-symbol + $names
+  }
+
+  p($selector)
+
+  {$selector} {
+    {block}
+  }
+}
+
+// element($name, $block)
+//   /{selector()}-{$name}
+//     $block()

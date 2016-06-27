@@ -1,0 +1,136 @@
+// =============================================================================
+// Component Styles
+// =============================================================================
+
+@import 'symbols'
+
+// Functions
+// -----------------------------------------------------------------------------
+
+
+// Component
+_build-component($symbol, $names)
+  $selector = ''
+
+  for $name, $i in $names
+    $selector += '.' + $symbol + $name
+
+    if ($i + 1) != length($names)
+      $selector += + ','
+
+  return $selector
+
+
+// Modifier
+_build-modifier($symbol, $names)
+  $selector = ''
+
+  for $name, $i in $names
+    $selector += '&.' + $symbol + $name
+
+    if ($i + 1) != length($names)
+      $selector += ','
+
+  return $selector
+
+
+// Element
+_build-element($symbol, $names)
+  $selector = ''
+
+  for $name, $i in $names
+    $pattern = '&' + $symbol + $name
+
+    if called-from[0] == 'element' and called-from[1] == 'modifier'
+      $pattern = '& ^[0]' + $symbol + $name
+
+    $selector += $pattern
+
+    if ($i + 1) != length($names)
+      $selector += ','
+
+  return $selector
+
+
+// State
+_build-state($symbol, $names)
+  $selector = ''
+
+  for $name, $i in $names
+    $selector += '&.' + $symbol + $name
+
+    if ($i + 1) != length($names)
+      $selector += ','
+
+  return $selector
+
+
+// Utility
+_build-utility($symbol, $names)
+  $selector = ''
+
+  for $name, $i in $names
+    $selector += '#' + $root-id + ' .' + $_utility-symbol + $name
+
+    if ($i + 1) != length($names)
+      $selector += ','
+
+  return $selector
+
+
+// Sibling Component
+_build-sibling-component($symbol, $names)
+  $selector = ''
+
+  for $name, $i in $names
+    $selector += '& + .' + $symbol + $name
+
+    if ($i + 1) != length($names)
+      $selector += + ','
+
+  return $selector
+
+
+// Sibling Element
+_build-sibling-element($symbol, $names)
+  $selector = ''
+
+  for $name, $i in $names
+    $pattern = '& + &' + $symbol + $name
+
+    if !$names
+      $pattern = '& + &'
+
+    else if called-from[0] == 'element' and called-from[1] == 'modifier'
+      $pattern = '& + ^[0]' + $symbol + $name
+
+    $selector += $pattern
+
+    if ($i + 1) != length($names)
+      $selector += ','
+
+  return $selector
+
+
+// Sibling (generic)
+_build-sibling($names)
+  $selector = ''
+
+  for $name, $i in $names
+    $pattern = '& + .' + $name
+
+    if !$names
+      $pattern = '& + &'
+
+    else if called-from[1] == 'component'
+      $pattern = '& + .' + $_component-symbol + $name
+
+    else if called-from[1] == 'element'
+      $pattern = '& + ^[-1]' + $_element-symbol + $name
+
+    else if called-from[1] == 'modifier' and called-from[0] == 'component'
+      $pattern = '& + .' + $_component-symbol + $name
+
+    $selector += $pattern
+
+  return $selector

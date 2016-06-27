@@ -1,0 +1,39 @@
+// =============================================================================
+// Component Styles
+//
+// Escape selector function
+// Description goes here!
+// =============================================================================
+
+escape-symbol($symbol) {
+  $symbol-characters = split('', $symbol)
+  $special-characters = '` - = [ ] \\ ; , . / ~ ! @ # $ % ^ & * ( ) + { } | : " < > ? ' + "'"
+  $special-characters = split(' ', $special-characters)
+
+  $escaped-symbol = ''
+
+  for $character, $index in $symbol-characters {
+    $is-first-character = $index == 0
+    $is-special-character = index($special-characters, $character)
+    $is-number = !!match('[0-9]', $character)
+
+    $starts-with-number = $is-first-character and $is-number
+    $starts-with-hyphen-followed-by-number = $is-first-character and $character == '-' and length($symbol-characters) > 0 and !!match('[0-9]', $symbol-characters[1])
+
+    if $starts-with-number {
+      $escaped-symbol += escape-number($character)
+    } else if $is-special-character {
+      $escaped-symbol += \\ + $character
+    } else {
+      $escaped-symbol += $character
+    }
+
+    p($escaped-symbol)
+  }
+
+  return $escaped-symbol
+}
+
+escape-number($number) {
+  return s('\\3%s ', s($number))
+}

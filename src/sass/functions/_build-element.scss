@@ -1,0 +1,81 @@
+// =============================================================================
+// Component Styles
+//
+// Build element function
+// Description goes here!
+// =============================================================================
+
+@function _build-element($symbol, $names) {
+  $parents: nth(&, 1);
+  $base-parent: nth($parents, 1);
+  $selector: "";
+
+  // @each $parent in & {
+  //   @debug "parent", nth($sel, -1);
+  // }
+
+  // @each $parent in $parents {
+  //   @debug $parent;
+  // }
+
+  // @for $index from 1 through length(nth(&, 1)) {
+  //   @debug $index, length(nth(&, 1));
+  // }
+
+
+  @for $i from 1 through length($names) {
+    $name: nth($names, $i);
+    $pattern: '&' + $symbol + $name;
+
+    // Check if nested in an option
+    $modifier-index: index(&, $modifier-symbol);
+
+    // @debug "base-parent = ", $base-parent;
+
+    @if length($parents) > 1 {
+      $calledFrom0: nth($parents, -1);
+      $calledFrom1: nth($parents, -2);
+
+      // @debug "called-from[0] = ", nth($parents, -1);
+      // @debug "called-from[1] = ", nth($parents, -2);
+
+      // @debug & + " " + $calledFrom0 + $symbol + $name;
+      // @debug $calledFrom0, $name;
+      // @debug $calledFrom1;
+      $insert-index: str-index($calledFrom0, $modifier-symbol);
+      @debug str-index(selector-parse(nth(&, 1)), $calledFrom0), selector-parse(nth(&, 1));
+
+      @debug str-insert($calledFrom0, "_#{$name}_", $insert-index - 1);
+
+      // @if index {
+      //   @debug "match";
+      // }
+    }
+    // @debug $modifier-index, &, $modifier-symbol, $name;
+
+    $selector: $selector + $pattern;
+
+    @if $i != length($names) {
+      $selector: $selector + ",";
+    }
+  }
+
+  @return $selector;
+}
+
+
+// _build-element($symbol, $names)
+//   $selector = ''
+//
+//   for $name, $i in $names
+//     $pattern = '&' + $symbol + $name
+//
+//     if called-from[0] == 'element' and called-from[1] == 'modifier'
+//       $pattern = '& ^[0]' + $symbol + $name
+//
+//     $selector += $pattern
+//
+//     if ($i + 1) != length($names)
+//       $selector += ','
+//
+//   return $selector

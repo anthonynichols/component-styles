@@ -1,0 +1,19 @@
+// =============================================================================
+// Component Styles
+// =============================================================================
+
+// #
+build-component-selector($component-names...) {
+  $selector = ''
+
+  for $component-name, $index in $component-names {
+    // p($component-names)
+    $selector += '.' + $component-symbol + $component-name
+
+    if ($index + 1) != length($component-names) {
+      $selector += ','
+    }
+  }
+
+  return $selector
+}

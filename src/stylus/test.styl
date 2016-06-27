@@ -1,0 +1,45 @@
+@import 'component-styles'
+
++component('Button') {
+  content: '.Button'
+
+  +modifier('primary') {
+    content: '.Button.\\*primary'
+  }
+
+  +element('content') {
+    content: '.Button-content'
+
+    +element('header') {
+      content: '.Button-content-header'
+
+      +modifier('foo') {
+        content: '.Button-content-header.\\*foo'
+
+        +element('element-in-modifier') {
+          content: '.Button-content-header.\\*foo .Button-content-header-element-in-modifier'
+        }
+      }
+
+      +element('heading') {
+        content: '.Button-content-header-heading'
+      }
+    }
+  }
+}
+
++component(Card, Panel) {
+  content: '.Card, .Panel'
+
+  +component(Another) {
+    content: '.Card, .Another, .Panel .Another'
+  }
+}
+
+// component('Button', @(){
+//   content: '.Button'
+//
+//   element('content', @(){
+//     content: '.Button-content'
+//   })
+// })

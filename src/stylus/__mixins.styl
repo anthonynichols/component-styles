@@ -1,0 +1,56 @@
+// =============================================================================
+// Component Styles
+// =============================================================================
+
+@import 'symbols'
+@import 'functions'
+
+// Mixins
+// -----------------------------------------------------------------------------
+
+// Component
+component($names...)
+  {_build-component($_component-symbol, $names)}
+    {block}
+
+
+// Modifier
+modifier($names...)
+  {_build-modifier($_modifier-symbol, $names)}
+    {block}
+
+
+// Element
+element($names...)
+  {_build-element($_element-symbol, $names)}
+    {block}
+
+
+// State
+state($names...)
+  {_build-state($_state-symbol, $names)}
+    {block}
+
+
+// Utility
+utility($names...)
+  {_build-utility($_utility-symbol, $names)}
+    {block}
+
+
+// Sibling Component
+sibling-component($names...)
+  {_build-sibling-component($_component-symbol, $names)}
+    {block}
+
+
+// Sibling Element
+sibling-element($names...)
+  {_build-sibling-element($_element-symbol, $names)}
+    {block}
+
+
+// Sibling (generic)
+sibling($names...)
+  {_build-sibling($names)}
+    {block}

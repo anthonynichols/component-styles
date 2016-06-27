@@ -1,0 +1,20 @@
+// =============================================================================
+// Component Styles
+//
+// Build component function
+// Description goes here!
+// =============================================================================
+
+@function _build-component($symbol, $names) {
+  $selector: "";
+
+  @for $index from 1 through length($names) {
+    $selector: $selector + "." + $symbol + nth($names, $index);
+
+    @if $index != length($names) {
+      $selector: $selector + ",";
+    }
+  }
+
+  @return $selector;
+}

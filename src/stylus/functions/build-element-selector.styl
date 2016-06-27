@@ -1,0 +1,40 @@
+// =============================================================================
+// Component Styles
+// =============================================================================
+
+build-element-selector($elements...) {
+  $selector = ''
+  $selector-depth = length(selectors())
+
+  // p(selector('^[0..-2]'))
+  // p(selectors())
+
+  // p('selector: ' + selector())
+  // p('called from: ' + called-from[1])
+
+  for $element, $index in $elements {
+    if $selector-depth > 1 {
+      $last-selector = last(selectors())
+
+      $not-last-selector = selector('^[0..-2]')
+
+      // p($not-last-selector)
+      // p($element)
+      // p(selectors()[0])
+    }
+
+    $pattern = '&' + $element-symbol + $element
+
+    if called-from[1] == 'modifier' {
+      $pattern = '& ^[-1]' + $element-symbol + $element
+    }
+
+    $selector += $pattern
+
+    if ($index + 1) != length($elements) {
+      $selector += ','
+    }
+  }
+
+  return $selector
+}

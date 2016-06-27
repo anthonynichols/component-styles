@@ -1,0 +1,43 @@
+{
+  "name": "component-styles",
+  "version": "1.0.0",
+  "description": "Awesome component style tool",
+  "main": "index.js",
+  "scripts": {
+    "test": "node_modules/.bin/mocha",
+    "node-sass": "./node_modules/.bin/node-sass",
+    "sass": "sass --update test/fixtures/sass --sourcemap=none --style=expanded",
+    "stylus": "stylus"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anthonynichols/component-styles.git"
+  },
+  "keywords": [
+    "components",
+    "styling",
+    "stylus"
+  ],
+  "author": "Anthony Nichols",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/anthonynichols/component-styles/issues"
+  },
+  "homepage": "https://github.com/anthonynichols/component-styles#readme",
+  "dependencies": {
+    "babel-register": "^6.18.0",
+    "chai": "^3.5.0",
+    "gulp-postcss": "^6.2.0",
+    "mocha": "^3.1.2",
+    "node-sass": "^3.10.1",
+    "postcss": "^5.2.5",
+    "postcss-cli": "^2.6.0",
+    "postcss-nested": "^1.0.0",
+    "postcss-nested-vars": "^0.0.2",
+    "postcss-simple-vars": "^3.0.0",
+    "shelljs": "^0.7.5",
+    "should": "^11.1.1",
+    "specificity": "^0.3.0",
+    "stylus": "^0.54.5"
+  }
+}

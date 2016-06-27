@@ -1,0 +1,42 @@
+// =============================================================================
+// Component Styles
+//
+// Escape symbol function
+// Description goes here!
+// =============================================================================
+
+@function _escape-symbol($symbol) {
+  $special-characters: (
+    "~", "`", "!", "@", "#", "$", "%", "^", "&", "*", "(",
+    ")", "-", "+", "=", ",", ".", "/", ";", ":", "'", '"',
+    "<", ">", "?", "{", "[", "}", "]", "|", "\\"
+  );
+  $numbers: ("0", "1", "2", "3", "4", "5", "6", "7", "8", "9");
+  $escaped-symbol: "";
+
+  @for $i from 1 through str-length($symbol) {
+    $current-character: str-slice($symbol, $i, $i);
+    $is-first-character: $i == 1;
+    $is-special-character: index($special-characters, $current-character);
+    $is-number: index($numbers, $current-character);
+
+    $starts-with-number: $is-first-character and $is-number;
+    $starts-with-hyphen-followed-by-number: $is-first-character and $current-character == "-" and str-length($symbol) > 1 and index($numbers, str-slice($symbol, 2, 2));
+
+    @if $starts-with-number {
+      $escaped-symbol: _escape-number($current-character);
+    } @else if $starts-with-hyphen-followed-by-number {
+      $escaped-symbol: "\\" + $current-character;
+    } @else if $is-special-character {
+      $escaped-symbol: $escaped-symbol + "\\" + $current-character;
+    } @else {
+      $escaped-symbol: $escaped-symbol + $current-character;
+    }
+  }
+
+  @return $escaped-symbol;
+}
+
+@function _escape-number($number) {
+  @return "\\3#{$number} ";
+}

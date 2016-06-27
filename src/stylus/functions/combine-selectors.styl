@@ -1,0 +1,13 @@
+// =============================================================================
+// Component Styles
+// =============================================================================
+
+selector-append($classes, $symbol, $parent = '&') {
+  $selector = ''
+
+  for $name in $classes {
+    $selector += '.' + $symbol + $name
+  }
+
+  return $selector
+}
