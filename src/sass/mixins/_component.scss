@@ -1,0 +1,12 @@
+// =============================================================================
+// Component Styles
+//
+// Component mixin
+// Description goes here!
+// =============================================================================
+
+@mixin component($names...) {
+  #{_build-component("." + $component-symbol, $names)} {
+    @content;
+  }
+}

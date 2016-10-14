@@ -4,7 +4,8 @@
   "description": "Awesome component style tool",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "node-sass": "./node_modules/.bin/node-sass"
   },
   "repository": {
     "type": "git",
@@ -21,9 +22,8 @@
     "url": "https://github.com/anthonynichols/component-styles/issues"
   },
   "homepage": "https://github.com/anthonynichols/component-styles#readme",
-  "devDependencies": {
-    "gulp": "^3.9.1",
-    "specificity": "^0.2.1",
-    "stylus": "^0.54.5"
+  "dependencies": {
+    "node-sass": "^3.10.1",
+    "specificity": "^0.3.0"
   }
 }

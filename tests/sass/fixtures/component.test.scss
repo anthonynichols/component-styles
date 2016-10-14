@@ -1,0 +1,15 @@
+// =============================================================================
+// Component Styles
+//
+// Build component test
+// Description goes here!
+// =============================================================================
+
+@import "../../../src/sass/component-styles";
+
+@include component("ComponentName") {
+
+  @include component("NestedComponentName") {
+    color: #bada55;    
+  }
+}
