@@ -6,7 +6,7 @@
 // =============================================================================
 
 @mixin component($names...) {
-  #{_build-component("." + $component-symbol, $names)} {
+  #{_build-component($component-symbol, $names)} {
     @content;
   }
 }

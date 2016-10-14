@@ -8,10 +8,10 @@
 @function _build-component($symbol, $names) {
   $selector: "";
 
-  @for $i from 1 through length($names) {
-    $selector: $selector + $symbol + nth($names, $i);
+  @for $index from 1 through length($names) {
+    $selector: $selector + "." + $symbol + nth($names, $index);
 
-    @if ($i != length($names)) {
+    @if $index != length($names) {
       $selector: $selector + ",";
     }
   }

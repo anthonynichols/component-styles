@@ -7,9 +7,93 @@
 
 @import "../../../src/sass/component-styles";
 
-@include component("ComponentName") {
+$color-base-blue:   #2185d0;
+$color-base-black:  #000000;
+$color-base-brown:  #a5673f;
+$color-base-green:  #21ba45;
+$color-base-gray:   #767676;
+$color-base-olive:  #b5cc18;
+$color-base-orange: #f2711c;
+$color-base-pink:   #e03997;
+$color-base-purple: #a333c8;
+$color-base-red:    #db2828;
+$color-base-teal:   #00b5ad;
+$color-base-violet: #6435c9;
+$color-base-white:  #ffffff;
+$color-base-yellow: #fbbd08;
+$color-primary:     #2199e8;
 
-  @include component("NestedComponentName") {
-    color: #bada55;    
+@mixin Button() {
+  border: 1px solid transparent;
+  border-radius: 2px;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Lato;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  transition: background-color .1s ease-in-out, border-color .1s ease-in-out, color .1s ease-in-out;
+  -webkit-appearance: none;
+}
+
+@include component("Button") {
+  @include Button();
+
+  @include modifier("primary") {
+    background-color: $color-primary;
+    color: $color-base-white;
+
+    @include element("in-component-modifier") {
+      color: blue;
+    }
+
+    &:hover {
+      background-color: darken($color-primary, 10%);
+    }
+  }
+
+  @include element("in-component") {
+    color: red;
+
+    @include element("in-other-element") {
+      color: yellow;
+    }
+  }
+}
+
+@include component(Component) {
+      // @include element(foo) {
+      //   display: none;
+      //
+      //   @include element(bar) {
+      //     display: inline;
+      //   }
+      // }
+
+  @include modifier(modifier) {
+
+    @include element(baz) {
+      display: block;
+    }
+  }
+}
+
+@include component("AddLibrary") {
+  background-color: $color-primary;
+  width: 640px;
+
+  @include element("header", "footer") {
+    align-items: center;
+    background-color: darken($color-primary, 8%);
+    border-radius: 3px 3px 0 0;
+    display: flex;
+    padding: 16px 24px;
+  }
+
+  @include element("header") {
+    @include component("Text") {
+      font-size: 20px;
+    }
   }
 }

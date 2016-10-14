@@ -1,0 +1,45 @@
+// =============================================================================
+// Component Styles
+//
+// Escape selector function
+// Description goes here!
+// =============================================================================
+
+$component-symbol: "" !default;
+$modifier-symbol: "--" !default;
+$element-symbol: "-" !default;
+$state-symbol: "*" !default;
+$utility-symbol: "+" !default;
+$root-symbol: "__root" !default;
+
+@function _escape-symbol($symbol) {
+  $valid-characters: "-","_",
+    "a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z",
+    "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z",
+    "0","1","2","3","4","5","6","7","8","9";
+  $invalid-first-characters: "0","1","2","3","4","5","6","7","8","9";
+
+  $escaped-symbol: "";
+
+  @for $i from 1 through str-length($symbol) {
+    $current-character: str-slice($symbol, $i, $i);
+    $is-valid-character: index($valid-characters, $current-character);
+    $is-valid-first-character: $is-valid-character and not index($invalid-first-characters, $current-character);
+
+    @if $is-valid-character {
+      @if $i == 1 and not $is-valid-first-character {
+        $escaped-symbol: $escaped-symbol + _escape-number($current-character);
+      } @else {
+        $escaped-symbol: $escaped-symbol + $current-character;
+      }
+    } @else {
+      $escaped-symbol: $escaped-symbol + "\\" + $current-character;
+    }
+  }
+
+  @return $escaped-symbol;
+}
+
+@function _escape-number($number) {
+  @return "\\3#{$number} ";
+}

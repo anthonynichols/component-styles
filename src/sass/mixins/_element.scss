@@ -1,14 +1,12 @@
 // =============================================================================
 // Component Styles
 //
-// Combine selectors function
+// Element mixin
 // Description goes here!
 // =============================================================================
 
-@function _combine-selectors($names, $symbol, $selector) {
-  @each $name in $names {
-    $selector: $selector + "." + $symbol + $name;
+@mixin element($names...) {
+  #{_build-element(_escape-symbol($element-symbol), $names)} {
+    @content;
   }
-
-  @return $selector;
 }
