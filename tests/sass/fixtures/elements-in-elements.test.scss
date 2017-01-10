@@ -1,0 +1,24 @@
+// =============================================================================
+// Component Styles
+//
+// Build elements in elements test
+// Description goes here!
+// =============================================================================
+
+@import "../../../src/sass/component-styles";
+
+@include component(tweet) {
+  background: #fff;
+
+  @include element(message) {
+    float: left;
+
+    @include element(title) {
+      font-size: 20px;
+
+      @include option(special) {
+        color: orange;
+      }
+    }
+  }
+}

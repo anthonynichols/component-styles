@@ -1,0 +1,17 @@
+// =============================================================================
+// Component Styles
+//
+// Build component test
+// Description goes here!
+// =============================================================================
+
+@import "../../../src/sass/component-styles";
+
+$component-symbol: "$";
+
+@include component(tweet) {
+  background: #fff;
+}
+
+// reset symbols for the rest of the tests
+$component-symbol: "";

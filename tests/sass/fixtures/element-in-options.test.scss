@@ -1,0 +1,29 @@
+// =============================================================================
+// Component Styles
+//
+// Build element in options test
+// Description goes here!
+// =============================================================================
+
+@import "../../../src/sass/component-styles";
+
+@include component(tweet) {
+  background: #fff;
+
+  @include modifier(promoted) {
+    border-bottom: 1px solid yellow;
+
+    @include element(profile) {
+      border: 5px solid green;
+
+      @include element(img) {
+        float: left;
+
+        @include element(header) {
+          clear: both;
+        }
+
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+// =============================================================================
+// Component Styles
+//
+// Build modifier test
+// Description goes here!
+// =============================================================================
+
+@import "../../../src/sass/component-styles";
+
+@include component(tweet) {
+  background: #fff;
+
+  @include modifier(promoted) {
+    border-bottom: 1px solid yellow;
+  }
+}

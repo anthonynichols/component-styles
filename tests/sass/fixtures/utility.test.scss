@@ -1,0 +1,12 @@
+// =============================================================================
+// Component Styles
+//
+// Build utility test
+// Description goes here!
+// =============================================================================
+
+@import "../../../src/sass/component-styles";
+
+@include utility(rounded){
+  border-radius: 5px;
+}

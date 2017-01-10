@@ -1,0 +1,17 @@
+// =============================================================================
+// Component Styles
+//
+// Build element nested multiple psuedo test
+// Description goes here!
+// =============================================================================
+
+@import "../../../src/sass/component-styles";
+
+@include component(frame) {
+  &:hover &,
+  &:focus & {
+    @include element(img) {
+      color: maroon;
+    }
+  }
+}

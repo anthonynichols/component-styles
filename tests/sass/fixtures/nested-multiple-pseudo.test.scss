@@ -1,0 +1,14 @@
+// =============================================================================
+// Component Styles
+//
+// Build component test
+// Description goes here!
+// =============================================================================
+
+@import "../../../src/sass/component-styles";
+
+@include component(frame) {
+  &:hover, &:focus {
+    color: yellow;
+  }
+}

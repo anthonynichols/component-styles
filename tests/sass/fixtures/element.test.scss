@@ -1,0 +1,16 @@
+// =============================================================================
+// Component Styles
+//
+// Build element test
+// Description goes here!
+// =============================================================================
+
+@import "../../../src/sass/component-styles";
+
+@include component(tweet) {
+  background: #fff;
+
+  @include element(image) {
+    float: left;
+  }
+}

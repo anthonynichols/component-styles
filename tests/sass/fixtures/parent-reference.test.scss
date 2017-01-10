@@ -1,0 +1,14 @@
+// =============================================================================
+// Component Styles
+//
+// Build parent reference test
+// Description goes here!
+// =============================================================================
+
+@import "../../../src/sass/component-styles";
+
+@include component(card) {
+  &:hover {
+    color: blue;
+  }
+}
