@@ -1,10 +1,14 @@
-# Component Styles v1.0.0
+# Component Styles v1.0.1
 
 TODO: Add description
 
 ## Installation
 
-TODO: Add installation guide
+`npm install component-styles`
+
+```stylus
+@import 'path/to/node_modules/component-styles'
+```
 
 ## Features
 
