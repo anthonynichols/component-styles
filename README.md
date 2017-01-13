@@ -4,7 +4,11 @@ TODO: Add description
 
 ## Installation
 
-TODO: Add installation guide
+`npm install component-styles`
+
+```stylus
+@import 'path/to/node_modules/component-styles'
+```
 
 ## Features
 
