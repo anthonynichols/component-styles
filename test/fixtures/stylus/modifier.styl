@@ -1,0 +1,56 @@
+// =============================================================================
+// Component Styles
+//
+// Modifier tests
+// Description goes here!
+// =============================================================================
+
+@import 'src/stylus/component-styles'
+
++component('Button') {
+  +modifier('primary') {
+    should-be: '.Button.\*primary'
+  }
+
+  +modifier('primary', 'outline') {
+    should-be: '.Button.\*primary.\*outline'
+  }
+
+  +modifier('secondary') {
+    +modifier('disabled') {
+      should-be: '.Button.\*secondary.\*disabled'
+    }
+  }
+}
+
++component('Panel') {
+  +element('body') {
+    +element('list') {
+      +element('item') {
+        +element('icon') {
+          +parent-modifier('primary') {
+            should-be: '.Panel-body-list-item.\*primary .Panel-body-list-item-icon'
+          }
+
+          +parent-modifier('primary', 'outline') {
+            should-be: '.Panel-body-list-item.\*primary.\*outline .Panel-body-list-item-icon'
+          }
+
+          +component-modifier('primary') {
+            should-be: '.Panel.\*primary .Panel-body-list-item-icon'
+          }
+
+          +component-modifier('primary', 'outline') {
+            should-be: '.Panel.\*primary.\*outline .Panel-body-list-item-icon'
+          }
+
+          +modifier('awesome') {
+            +component-modifier('primary') {
+              should-be: '.Panel.\*primary .Panel-body-list-item-icon.\*awesome'
+            }
+          }
+        }
+      }
+    }
+  }
+}

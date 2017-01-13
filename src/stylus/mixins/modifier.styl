@@ -1,0 +1,54 @@
+// =============================================================================
+// Component Styles
+//
+// Modifier mixins
+// Description goes here!
+// =============================================================================
+
+modifier($modifier-names...) {
+  $selector = '&'
+
+  for $modifier-name in $modifier-names {
+    $selector += '.' + $modifier-symbol + $modifier-name
+  }
+
+  {$selector} {
+    {block}
+  }
+}
+
+parent-modifier($modifier-names...) {
+  if called-from[0] == 'component-modifier' {
+    error('Cannot use `parent-modifier` as a direct decendent of `component-modifier`')
+  }
+
+  if called-from[0] == 'modifier' {
+    error('Cannot use `parent-modifier` as a direct decendent of `modifier`')
+  }
+
+  $selector = '../'
+
+  for $modifier-name in $modifier-names {
+    $selector += '.' + $modifier-symbol + $modifier-name
+  }
+
+  $selector += ' &'
+
+  {$selector} {
+    {block}
+  }
+}
+
+component-modifier($modifier-names...) {
+  $selector = '~/'
+
+  for $modifier-name in $modifier-names {
+    $selector += '.' + $modifier-symbol + $modifier-name
+  }
+
+  $selector += ' &'
+
+  {$selector} {
+    {block}
+  }
+}

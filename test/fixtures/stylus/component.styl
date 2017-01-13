@@ -1,0 +1,48 @@
+// =============================================================================
+// Component Styles
+//
+// Component tests
+// Description goes here!
+// =============================================================================
+
+// TODO: Test the effects of string vs non-string arguments
+
+@import 'src/stylus/component-styles'
+
++component('Button') {
+  should-be: '.Button'
+}
+
++component('Panel', 'Card') {
+  should-be: '.Panel,.Card'
+}
+
++component('Card') {
+  +component('Icon') {
+    should-be: '.Card .Icon'
+  }
+
+  +sibling-component('Panel') {
+    should-be: '.Card + .Panel'
+  }
+
+  +sibling-component('Panel', 'Avatar') {
+    should-be: '.Card + .Panel,.Card + .Avatar'
+  }
+
+  +general-sibling-component('Panel') {
+    should-be: '.Card ~ .Panel'
+  }
+
+  +general-sibling-component('Panel', 'Avatar') {
+    should-be: '.Card ~ .Panel,.Card ~ .Avatar'
+  }
+
+  +child-component('Panel') {
+    should-be: '.Card > .Panel'
+  }
+
+  +child-component('Panel', 'Avatar') {
+    should-be: '.Card > .Panel,.Card > .Avatar'
+  }
+}

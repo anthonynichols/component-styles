@@ -1,0 +1,58 @@
+// =============================================================================
+// Component Styles
+//
+// Component mixins
+// Description goes here!
+// =============================================================================
+
+component($component-names...) {
+  $selector = ''
+
+  for $component-name, $index in $component-names {
+    $selector += '.' + $component-symbol + $component-name
+    $selector += ',' unless ($index + 1) == length($component-names)
+  }
+
+  {$selector} {
+    {block}
+  }
+}
+
+sibling-component($component-names...) {
+  $selector = ''
+
+  for $component-name, $index in $component-names {
+    $selector += '& + .' + $component-symbol + $component-name
+    $selector += ',' unless ($index + 1) == length($component-names)
+  }
+
+  {$selector} {
+    {block}
+  }
+}
+
+general-sibling-component($component-names...) {
+  $selector = ''
+
+  for $component-name, $index in $component-names {
+    $selector += '& ~ .' + $component-symbol + $component-name
+    $selector += ',' unless ($index + 1) == length($component-names)
+  }
+
+  {$selector} {
+    {block}
+  }
+}
+
+child-component($component-names...) {
+  $selector = ''
+
+  for $component-name, $index in $component-names {
+    $selector += '& > .' + $component-symbol + $component-name
+    $selector += ',' unless ($index + 1) == length($component-names)
+  }
+
+  {$selector} {
+    {block}
+  }
+}

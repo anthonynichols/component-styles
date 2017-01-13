@@ -1,0 +1,122 @@
+// =============================================================================
+// Component Styles
+//
+// Element tests
+// Description goes here!
+// =============================================================================
+
+@import 'src/stylus/component-styles'
+
++component('Panel') {
+  +element('header') {
+    should-be: '.Panel-header'
+  }
+
+  +element('header', 'footer') {
+    should-be: '.Panel-header,.Panel-footer'
+  }
+
+  +element('footer') {
+    +element('text') {
+      should-be: '.Panel-footer-text'
+    }
+  }
+
+  +element('header', 'footer') {
+    +element('text') {
+      should-be: '.Panel-header-text,.Panel-footer-text'
+    }
+  }
+
+  +modifier('awesome') {
+    +element('icon') {
+      should-be: '.Panel.\\*awesome .Panel-icon'
+    }
+  }
+
+  +pseudo('hover') {
+    +element('icon') {
+      should-be: '.Panel:hover .Panel-icon'
+    }
+  }
+
+  +element('header') {
+    +sibling-element('footer') {
+      should-be: '.Panel-header + .Panel-footer'
+    }
+
+    +sibling-element('body', 'footer') {
+      should-be: '.Panel-header + .Panel-body,.Panel-header + .Panel-footer'
+    }
+
+    +modifier('awesome') {
+      +sibling-element('footer') {
+        should-be: '.Panel-header.\\*awesome + .Panel-footer'
+      }
+    }
+
+    +pseudo('hover') {
+      +sibling-element('footer') {
+        should-be: '.Panel-header:hover + .Panel-footer'
+      }
+    }
+  }
+
+  +element('header') {
+    +general-sibling-element('footer') {
+      should-be: '.Panel-header ~ .Panel-footer'
+    }
+
+    +general-sibling-element('body', 'footer') {
+      should-be: '.Panel-header ~ .Panel-body,.Panel-header ~ .Panel-footer'
+    }
+
+    +modifier('awesome') {
+      +general-sibling-element('footer') {
+        should-be: '.Panel-header.\\*awesome ~ .Panel-footer'
+      }
+    }
+
+    +pseudo('hover') {
+      +general-sibling-element('footer') {
+        should-be: '.Panel-header:hover ~ .Panel-footer'
+      }
+    }
+  }
+
+  +child-element('content') {
+    should-be: '.Panel > .Panel-content'
+  }
+
+  +child-element('header', 'footer') {
+    should-be: '.Panel > .Panel-header,.Panel > .Panel-footer'
+  }
+
+  +modifier('awesome') {
+    +child-element('text') {
+      should-be: '.Panel.\\*awesome > .Panel-text'
+    }
+  }
+
+  +pseudo('hover') {
+    +child-element('text') {
+      should-be: '.Panel:hover > .Panel-text'
+    }
+  }
+
+  +element('header') {
+    +element('text') {
+      +parent-pseudo('hover') {
+        should-be: '.Panel-header:hover .Panel-header-text'
+      }
+    }
+  }
+
+  +element('header') {
+    +element('text') {
+      +component-pseudo('hover') {
+        should-be: '.Panel:hover .Panel-header-text'
+      }
+    }
+  }
+}

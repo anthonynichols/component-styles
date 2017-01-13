@@ -1,0 +1,300 @@
+// =============================================================================
+// Component Styles
+//
+// Symbols
+// Description goes here!
+// =============================================================================
+
+$component-symbol ?= ''
+$modifier-symbol ?= '\*'
+$element-symbol ?= '-'
+$state-symbol ?= '\@'
+$utility-symbol ?= '\+'
+$root-id ?= 'component-styles'
+
+// =============================================================================
+// Component Styles
+//
+// Component mixins
+// Description goes here!
+// =============================================================================
+
+component($component-names...) {
+  $selector = ''
+
+  for $component-name, $index in $component-names {
+    $selector += '.' + $component-symbol + $component-name
+    $selector += ',' unless ($index + 1) == length($component-names)
+  }
+
+  {$selector} {
+    {block}
+  }
+}
+
+sibling-component($component-names...) {
+  $selector = ''
+
+  for $component-name, $index in $component-names {
+    $selector += '& + .' + $component-symbol + $component-name
+    $selector += ',' unless ($index + 1) == length($component-names)
+  }
+
+  {$selector} {
+    {block}
+  }
+}
+
+general-sibling-component($component-names...) {
+  $selector = ''
+
+  for $component-name, $index in $component-names {
+    $selector += '& ~ .' + $component-symbol + $component-name
+    $selector += ',' unless ($index + 1) == length($component-names)
+  }
+
+  {$selector} {
+    {block}
+  }
+}
+
+child-component($component-names...) {
+  $selector = ''
+
+  for $component-name, $index in $component-names {
+    $selector += '& > .' + $component-symbol + $component-name
+    $selector += ',' unless ($index + 1) == length($component-names)
+  }
+
+  {$selector} {
+    {block}
+  }
+}
+
+// =============================================================================
+// Component Styles
+//
+// Element mixins
+// Description goes here!
+// =============================================================================
+
+element($element-names...) {
+  if !called-from {
+    error('Must use `element` inside of another mixin.')
+  }
+
+  $selector = ''
+
+  for $element-name, $index in $element-names {
+    if called-from[0] is 'modifier' or called-from[0] is 'pseudo' {
+      $selector += '& ^[0..-2]' + $element-symbol + $element-name
+    } else {
+      $selector += '&' + $element-symbol + $element-name
+    }
+
+    $selector += ',' unless ($index + 1) == length($element-names)
+  }
+
+  {$selector} {
+    {block}
+  }
+}
+
+sibling-element($element-names...) {
+  if called-from[0] == 'component' {
+    error('Cannot use `sibling-element` as a direct decendant of `component`. Try `sibling-component` instead.')
+  }
+
+  $selector = ''
+
+  for $element-name, $index in $element-names {
+    if called-from[0] is 'modifier' or called-from[0] is 'pseudo' {
+      $selector += '& + ^[0..-3]' + $element-symbol + $element-name
+    } else {
+      $selector += '& + ^[-1]' + $element-symbol + $element-name
+    }
+
+    $selector += ',' unless ($index + 1) == length($element-names)
+  }
+
+  {$selector} {
+    {block}
+  }
+}
+
+general-sibling-element($element-names...) {
+  if called-from[0] == 'component' {
+    error('Cannot use `general-sibling-element` as a direct decendant of `component`. Try `general-sibling-component` instead.')
+  }
+
+  $selector = ''
+
+  for $element-name, $index in $element-names {
+    if called-from[0] is 'modifier' or called-from[0] is 'pseudo' {
+      $selector += '& ~ ^[0..-3]' + $element-symbol + $element-name
+    } else {
+      $selector += '& ~ ^[-1]' + $element-symbol + $element-name
+    }
+
+    $selector += ',' unless ($index + 1) == length($element-names)
+  }
+
+  {$selector} {
+    {block}
+  }
+}
+
+child-element($element-names...) {
+  if !called-from {
+    error('Must use `child-element` inside of another mixin.')
+  }
+
+  $selector = ''
+
+  for $element-name, $index in $element-names {
+    if called-from[0] is 'modifier' or called-from[0] is 'pseudo' {
+      $selector += '& > ^[0..-2]' + $element-symbol + $element-name
+    } else {
+      $selector += '& > &' + $element-symbol + $element-name
+    }
+
+    $selector += ',' unless ($index + 1) == length($element-names)
+  }
+
+  {$selector} {
+    {block}
+  }
+}
+
+// =============================================================================
+// Component Styles
+//
+// Modifier mixins
+// Description goes here!
+// =============================================================================
+
+modifier($modifier-names...) {
+  $selector = '&'
+
+  for $modifier-name in $modifier-names {
+    $selector += '.' + $modifier-symbol + $modifier-name
+  }
+
+  {$selector} {
+    {block}
+  }
+}
+
+parent-modifier($modifier-names...) {
+  if called-from[0] == 'component-modifier' {
+    error('Cannot use `parent-modifier` as a direct decendent of `component-modifier`')
+  }
+
+  if called-from[0] == 'modifier' {
+    error('Cannot use `parent-modifier` as a direct decendent of `modifier`')
+  }
+
+  $selector = '../'
+
+  for $modifier-name in $modifier-names {
+    $selector += '.' + $modifier-symbol + $modifier-name
+  }
+
+  $selector += ' &'
+
+  {$selector} {
+    {block}
+  }
+}
+
+component-modifier($modifier-names...) {
+  $selector = '~/'
+
+  for $modifier-name in $modifier-names {
+    $selector += '.' + $modifier-symbol + $modifier-name
+  }
+
+  $selector += ' &'
+
+  {$selector} {
+    {block}
+  }
+}
+
+// =============================================================================
+// Component Styles
+//
+// Pseudo mixins
+// Description goes here!
+// =============================================================================
+
+$pseudo-elements ?= after, before, first-letter, first-line, selection, backdrop, placeholder, marker, spelling-error, grammar-error
+
+pseudo($pseudo-names...) {
+  $selector = ''
+
+  for $pseudo-name, $index in $pseudo-names {
+    if $pseudo-name in $pseudo-elements {
+      $selector += '&::' + $pseudo-name
+    } else {
+      $selector += '&:' + $pseudo-name
+    }
+
+    $selector += ',' unless ($index + 1) == length($pseudo-names)
+  }
+
+  {$selector} {
+    {block}
+  }
+}
+
+parent-pseudo($pseudo-names...) {
+  $selector = ''
+
+  for $pseudo-name, $index in $pseudo-names {
+    if $pseudo-name in $pseudo-elements {
+      $selector += '../::' + $pseudo-name + ' &'
+    } else {
+      $selector += '../:' + $pseudo-name + ' &'
+    }
+
+    $selector += ',' unless ($index + 1) == length($pseudo-names)
+  }
+
+  {$selector} {
+    {block}
+  }
+}
+
+component-psuedo($pseudo-names...) {
+  $selector = ''
+
+  for $pseudo-name, $index in $pseudo-names {
+    if $pseudo-name in $pseudo-elements {
+      $selector += '~/::' + $pseudo-name + ' &'
+    } else {
+      $selector += '~/:' + $pseudo-name + ' &'
+    }
+
+    $selector += ',' unless ($index + 1) == length($pseudo-names)
+  }
+
+  {$selector} {
+    {block}
+  }
+}
+
+// =============================================================================
+// Component Styles
+//
+// Utility mixin
+// Description goes here!
+// =============================================================================
+
+utility($utility-name) {
+  $selector = '/#' + $root-id + ' .' + $utility-symbol + $utility-name
+
+  {$selector} {
+    {block}
+  }
+}
