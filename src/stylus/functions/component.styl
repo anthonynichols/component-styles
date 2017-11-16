@@ -1,0 +1,18 @@
+// =============================================================================
+// Component Styles
+//
+// Component functions
+// TODO: Add description
+// =============================================================================
+
+component($component-names...) {
+  return __get-selector('.', $component-symbol, $component-names)
+}
+
+sibling-component($component-names...) {
+  return __get-selector('& + .', $component-symbol, $component-names)
+}
+
+child-component($component-names...) {
+  return __get-selector('& > .', $component-symbol, $component-names)
+}

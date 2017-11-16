@@ -1,0 +1,28 @@
+// =============================================================================
+// Component Styles
+//
+// Element function
+// TODO: Add description
+// =============================================================================
+
+element($element-names...) {
+  if !called-from {
+    error('Must use `element` inside of another mixin.')
+  }
+
+  $selector = ''
+
+  for $element-name, $index in $element-names {
+    if called-from[0] is 'modifier' or called-from[0] is 'pseudo' {
+      $selector += '& ^[0..-2]' + $element-symbol + $element-name
+    } else {
+      $selector += '&' + $element-symbol + $element-name
+    }
+
+    $selector += ',' unless ($index + 1) == length($element-names)
+  }
+
+  {$selector} {
+    {block}
+  }
+}

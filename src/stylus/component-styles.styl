@@ -1,8 +1,20 @@
 // =============================================================================
 // Component Styles
 //
-// Description goes here!
+// TODO: Add description
 // =============================================================================
 
-@import 'symbols'
-@import 'mixins'
+__get-selector($prefix, $symbol, $names) {
+  $selector = ''
+
+  for $name, $index in $names {
+    $selector += $prefix + $symbol + $name
+    $selector += ',' unless ($index + 1) = length($names)
+  }
+
+  return $selector
+}
+
+@require 'symbols'
+@require 'mixins'
+@require 'functions'

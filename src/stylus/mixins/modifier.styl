@@ -2,7 +2,7 @@
 // Component Styles
 //
 // Modifier mixins
-// Description goes here!
+// TODO: Add description
 // =============================================================================
 
 modifier($modifier-names...) {
@@ -11,6 +11,20 @@ modifier($modifier-names...) {
   for $modifier-name in $modifier-names {
     $selector += '.' + $modifier-symbol + $modifier-name
   }
+
+  {$selector} {
+    {block}
+  }
+}
+
+component-modifier($modifier-names...) {
+  $selector = '~/'
+
+  for $modifier-name in $modifier-names {
+    $selector += '.' + $modifier-symbol + $modifier-name
+  }
+
+  $selector += ' &'
 
   {$selector} {
     {block}
@@ -27,20 +41,6 @@ parent-modifier($modifier-names...) {
   }
 
   $selector = '../'
-
-  for $modifier-name in $modifier-names {
-    $selector += '.' + $modifier-symbol + $modifier-name
-  }
-
-  $selector += ' &'
-
-  {$selector} {
-    {block}
-  }
-}
-
-component-modifier($modifier-names...) {
-  $selector = '~/'
 
   for $modifier-name in $modifier-names {
     $selector += '.' + $modifier-symbol + $modifier-name
